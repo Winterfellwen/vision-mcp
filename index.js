@@ -6,15 +6,18 @@ import { Jimp } from 'jimp';
 import { SocksProxyAgent } from 'socks-proxy-agent';
 
 const CONFIG = {
-  timeout: 120000,
-  maxRetries: 5,
-  baseDelay: 2000,
-  maxDelay: 15000,
-  model: process.env.OPENROUTER_MODEL || 'nvidia/nemotron-nano-12b-v2-vl:free',
-  apiUrl: process.env.OPENROUTER_API_URL || 'https://openrouter.ai/api/v1',
-  rateLimitRpm: parseInt(process.env.OPENROUTER_RATE_LIMIT_RPM || '20', 10),
-  proxyEnabled: process.env.OPENROUTER_PROXY_ENABLED !== 'false',
-  proxyUrl: process.env.OPENROUTER_PROXY_URL || '',
+  timeout: parseInt(process.env.VISION_TIMEOUT || '120000', 10),
+  maxRetries: parseInt(process.env.VISION_MAX_RETRIES || '5', 10),
+  baseDelay: parseInt(process.env.VISION_RETRY_DELAY || '2000', 10),
+  maxDelay: parseInt(process.env.VISION_RETRY_MAX_DELAY || '15000', 10),
+  model: process.env.VISION_MODEL || process.env.OPENROUTER_MODEL || 'gpt-4o-mini',
+  apiKey: process.env.VISION_API_KEY || process.env.OPENROUTER_API_KEY || '',
+  apiUrl: process.env.VISION_API_URL || process.env.OPENROUTER_API_URL || '',
+  rateLimitRpm: parseInt(process.env.VISION_RATE_LIMIT_RPM || process.env.OPENROUTER_RATE_LIMIT_RPM || '20', 10),
+  proxyEnabled: (process.env.VISION_PROXY_ENABLED || process.env.OPENROUTER_PROXY_ENABLED || 'true') !== 'false',
+  proxyUrl: process.env.VISION_PROXY_URL || process.env.OPENROUTER_PROXY_URL || '',
+  imageMaxDim: parseInt(process.env.VISION_IMAGE_MAX_DIM || process.env.OPENROUTER_IMAGE_MAX_DIM || '768', 10),
+  imageQuality: parseInt(process.env.VISION_IMAGE_QUALITY || process.env.OPENROUTER_IMAGE_QUALITY || '70', 10),
 };
 
 const timestamps = [];
@@ -65,8 +68,8 @@ const sequential = (fn) => {
 };
 
 const COMPRESS = {
-  maxDimension: parseInt(process.env.OPENROUTER_IMAGE_MAX_DIM || '768', 10),
-  quality: parseInt(process.env.OPENROUTER_IMAGE_QUALITY || '70', 10),
+  maxDimension: CONFIG.imageMaxDim,
+  quality: CONFIG.imageQuality,
 };
 
 const compressImage = async (buffer) => {
@@ -135,19 +138,15 @@ const loadImageAsBase64 = async (imagePath) => {
 };
 
 const createClient = () => {
-  const apiKey = process.env.OPENROUTER_API_KEY;
+  const apiKey = CONFIG.apiKey;
   if (!apiKey) {
-    throw new Error('OPENROUTER_API_KEY is not set');
+    throw new Error('VISION_API_KEY or OPENROUTER_API_KEY is not set');
   }
   const opts = {
-    baseURL: CONFIG.apiUrl,
+    baseURL: CONFIG.apiUrl || undefined,
     apiKey: apiKey,
     timeout: CONFIG.timeout,
     maxRetries: 0,
-    defaultHeaders: {
-      'HTTP-Referer': process.env.OPENROUTER_SITE_URL || 'https://opencode.ai',
-      'X-OpenRouter-Title': process.env.OPENROUTER_SITE_NAME || 'VisionMCP',
-    },
   };
   if (CONFIG.proxyEnabled && CONFIG.proxyUrl) {
     const agent = new SocksProxyAgent(CONFIG.proxyUrl);
