@@ -82,6 +82,18 @@ This server uses the [OpenAI SDK](https://www.npmjs.com/package/openai) and work
 }
 ```
 
+For restricted networks, enable the SOCKS5 proxy:
+
+```jsonc
+"environment": {
+  "VISION_API_KEY": "sk-...",
+  "VISION_MODEL": "gpt-4o-mini",
+  "VISION_API_URL": "https://api.openai.com/v1",
+  "VISION_PROXY_ENABLED": "true",
+  "VISION_PROXY_URL": "socks5://127.0.0.1:10808"
+}
+```
+
 ## Features
 
 - **Image compression** — resizes (max 768px) and compresses (JPEG quality 70) via Jimp before sending

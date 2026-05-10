@@ -8,7 +8,9 @@
       "environment": {
         "VISION_API_KEY": "sk-...",
         "VISION_MODEL": "gpt-4o-mini",
-        "VISION_API_URL": "https://api.openai.com/v1"
+        "VISION_API_URL": "https://api.openai.com/v1",
+        "VISION_PROXY_ENABLED": "false",
+        "VISION_PROXY_URL": ""
       }
     }
   }
