@@ -1,8 +1,28 @@
-[![English](https://img.shields.io/badge/lang-English-blue)](../README.md)
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../assets/logo.svg">
+    <img src="../assets/logo.svg" alt="Vision MCP" width="120">
+  </picture>
+</p>
 
-# Vision MCP Server
+<h1 align="center">Vision MCP Server</h1>
 
-[Model Context Protocol (MCP)](https://modelcontextprotocol.io) 视觉服务器 — 通过任意 OpenAI 兼容 API（OpenAI、OpenRouter、Together、Groq 等）对图片进行分析、对比和文字提取。
+<p align="center">
+  <a href="../LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License"></a>
+  <a href="https://nodejs.org"><img src="https://img.shields.io/badge/node-%3E%3D20-339933" alt="Node 20+"></a>
+  <a href="https://github.com/Winterfellwen/vision-mcp"><img src="https://img.shields.io/github/stars/Winterfellwen/vision-mcp?style=flat&logo=github" alt="GitHub Stars"></a>
+  <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/MCP-compatible-6366f1" alt="MCP"></a>
+  <a href="../README.md"><img src="https://img.shields.io/badge/English-blue?logo=readme" alt="English"></a>
+</p>
+
+<p align="center">
+  通过任意 OpenAI 兼容 API 对图片进行分析、对比和文字提取。<br>
+  支持 <b>OpenAI</b> · <b>OpenRouter</b> · <b>Together</b> · <b>Groq</b> · <b>更多</b>
+</p>
+
+<p align="center">
+  <img src="../assets/architecture.svg" alt="系统架构" width="100%">
+</p>
 
 ## 工具
 
@@ -98,24 +118,6 @@ Vision MCP 兼容所有 MCP 客户端。各工具的配置方法见 [INTEGRATION
 对比图片：   !vision.compare_images image1=/path/to/a.png image2=/path/to/b.png
 提取文字：   !vision.extract_text imagePath=/path/to/document.png
 ```
-
-## 系统架构
-
-```
-                    ┌──────────────┐
-  MCP 客户端 ◄─────►│  index.js    │
-   (stdio 通信)     │  (MCP 服务)  │
-                    └──────┬───────┘
-                           │
-                    ┌──────▼───────┐
-                    │  OpenAI 兼容  │
-                    │  API 提供商   │
-                    └──────────────┘
-```
-
-1. 通过 MCP 接收图片路径 → Jimp 加载并压缩 → base64 编码
-2. 通过 OpenAI SDK 发送至兼容的视觉 API
-3. 通过 MCP 返回分析结果
 
 ## 许可证
 

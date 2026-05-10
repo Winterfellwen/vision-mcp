@@ -1,8 +1,28 @@
-[![简体中文](https://img.shields.io/badge/lang-简体中文-yellow)](i18n/README.zh-CN.md)
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo.svg">
+    <img src="assets/logo.svg" alt="Vision MCP" width="120">
+  </picture>
+</p>
 
-# Vision MCP Server
+<h1 align="center">Vision MCP Server</h1>
 
-A [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server for vision tasks — analyze, compare, and extract text from images via any OpenAI-compatible API (OpenAI, OpenRouter, Together, Groq, etc.).
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License"></a>
+  <a href="https://nodejs.org"><img src="https://img.shields.io/badge/node-%3E%3D20-339933" alt="Node 20+"></a>
+  <a href="https://github.com/Winterfellwen/vision-mcp"><img src="https://img.shields.io/github/stars/Winterfellwen/vision-mcp?style=flat&logo=github" alt="GitHub Stars"></a>
+  <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/MCP-compatible-6366f1" alt="MCP"></a>
+  <a href="i18n/README.zh-CN.md"><img src="https://img.shields.io/badge/简体中文-yellow?logo=readme" alt="简体中文"></a>
+</p>
+
+<p align="center">
+  Analyze, compare, and extract text from images via any OpenAI-compatible API.<br>
+  Works with <b>OpenAI</b> · <b>OpenRouter</b> · <b>Together</b> · <b>Groq</b> · <b>and more</b>
+</p>
+
+<p align="center">
+  <img src="assets/architecture.svg" alt="Architecture" width="100%">
+</p>
 
 ## Tools
 
@@ -98,25 +118,6 @@ Analyze:      !vision.analyze_image imagePath=/path/to/photo.png
 Compare:      !vision.compare_images image1=/path/to/a.png image2=/path/to/b.png
 Extract text: !vision.extract_text imagePath=/path/to/document.png
 ```
-
-## Architecture
-
-```
-                    ┌──────────────┐
-  MCP Client ◄─────►│  index.js    │
-    (stdio)         │  (stdio MCP) │
-                    └──────┬───────┘
-                           │
-                    ┌──────▼───────┐
-                    │  Any OpenAI  │
-                    │  Compatible  │
-                    │  API         │
-                    └──────────────┘
-```
-
-1. Image path received via MCP → load & compress (Jimp) → base64
-2. Send to OpenAI-compatible vision API via OpenAI SDK
-3. Return analysis text via MCP
 
 ## License
 
