@@ -1,0 +1,15 @@
+{
+  "experimental": {
+    "mcpServers": {
+      "vision": {
+        "command": "node",
+        "args": ["/path/to/vision-mcp/index.js"],
+        "env": {
+          "VISION_API_KEY": "sk-...",
+          "VISION_MODEL": "gpt-4o-mini",
+          "VISION_API_URL": "https://api.openai.com/v1"
+        }
+      }
+    }
+  }
+}

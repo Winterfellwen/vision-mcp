@@ -63,45 +63,17 @@ This server uses the [OpenAI SDK](https://www.npmjs.com/package/openai) and work
 | Groq | `https://api.groq.com/openai/v1` | `llama-3.2-90b-vision-preview` |
 | Any OpenAI-compatible endpoint | your URL | your model |
 
-## Integrate with OpenCode
+## Integrations
 
-```jsonc
-{
-  "mcp": {
-    "vision": {
-      "type": "local",
-      "command": ["node", "/path/to/vision-mcp/index.js"],
-      "enabled": true,
-      "environment": {
-        "VISION_API_KEY": "sk-...",
-        "VISION_MODEL": "gpt-4o-mini",
-        "VISION_API_URL": "https://api.openai.com/v1"
-      }
-    }
-  }
-}
-```
+Vision MCP works with any MCP-compatible client. See [INTEGRATIONS.md](INTEGRATIONS.md) for setup guides on:
 
-For restricted networks, enable the SOCKS5 proxy:
-
-```jsonc
-{
-  "mcp": {
-    "vision": {
-      "type": "local",
-      "command": ["node", "/path/to/vision-mcp/index.js"],
-      "enabled": true,
-      "environment": {
-        "VISION_API_KEY": "sk-...",
-        "VISION_MODEL": "gpt-4o-mini",
-        "VISION_API_URL": "https://api.openai.com/v1",
-        "VISION_PROXY_ENABLED": "true",
-        "VISION_PROXY_URL": "socks5://127.0.0.1:10808"
-      }
-    }
-  }
-}
-```
+- **OpenCode** — via `opencode.jsonc`
+- **Claude Code** — via `~/.claude/settings.json`
+- **Cursor** — via `.cursor/mcp.json`
+- **Windsurf** — via `.windsurf/mcp_config.json`
+- **Continue.dev** — via `.continuerc.json`
+- **GitHub Copilot** — via `~/.config/github-copilot/mcp.json`
+- **Gemini CLI** — via `~/.config/gemini/mcp.json`
 
 ## Features
 
