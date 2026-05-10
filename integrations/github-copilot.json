@@ -6,7 +6,16 @@
       "env": {
         "VISION_API_KEY": "sk-...",
         "VISION_MODEL": "gpt-4o-mini",
-        "VISION_API_URL": "https://api.openai.com/v1"
+        "VISION_API_URL": "https://api.openai.com/v1",
+        "VISION_RATE_LIMIT_RPM": "20",
+        "VISION_IMAGE_MAX_DIM": "768",
+        "VISION_IMAGE_QUALITY": "70",
+        "VISION_TIMEOUT": "120000",
+        "VISION_MAX_RETRIES": "5",
+        "VISION_RETRY_DELAY": "2000",
+        "VISION_RETRY_MAX_DELAY": "15000",
+        "VISION_PROXY_ENABLED": "false",
+        "VISION_PROXY_URL": ""
       }
     }
   }
